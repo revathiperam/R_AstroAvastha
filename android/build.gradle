@@ -12,10 +12,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle")
-        classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        // AGP version 8.1.1 is compatible with Gradle 7.6
+        classpath 'com.android.tools.build:gradle:8.1.1'
+        // Correct version for your React Native version
+        classpath("com.facebook.react:react-native-gradle-plugin:0.72.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10")
     }
 }
 

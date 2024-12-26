@@ -1,28 +1,24 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, SafeAreaView, Image, Alert } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, SafeAreaView, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
+import { DrawerActions } from '@react-navigation/native'; // Import DrawerActions
 
 const Header = () => {
-    const handleTranslatePress = () => {
-        Alert.alert('Translate Icon Pressed', 'This is where the translate action will go');
-    };
+    const navigation = useNavigation(); // Get navigation prop from useNavigation
 
-    const handleNotificationPress = () => {
-        Alert.alert('Notification Icon Pressed', 'This is where the notification action will go');
-    };
 
     return (
-        <LinearGradient
-            colors={['#EB7E01', '#F8B201']}
-            style={styles.linearGradient}
-        >
+        <LinearGradient colors={['#EB7E01', '#F8B201']} style={styles.linearGradient}>
             <SafeAreaView style={styles.safeArea}>
                 <View style={styles.headerContainer}>
-                    <TouchableOpacity>
+                    {/* Menu Button */}
+                    <TouchableOpacity onPress={() => navigation.openDrawer()}>
                         <Icon name="menu" size={28} color="#000" />
                     </TouchableOpacity>
 
+                    {/* Logo */}
                     <View style={styles.centerContainer}>
                         <Image
                             source={require('../assets/logos/Astroavastha.png')}
@@ -31,13 +27,9 @@ const Header = () => {
                         />
                     </View>
 
+                    {/* Right Side Icons */}
                     <View style={styles.rightIconsContainer}>
-                        <View style={styles.onlineContainer}>
-                            <Icon name="wifi" size={20} color="green" />
-                            <Text style={styles.onlineText}>Online</Text>
-                        </View>
-
-                        <TouchableOpacity onPress={handleTranslatePress}>
+                        <TouchableOpacity>
                             <Image
                                 source={require('../assets/icons/translate.png')}
                                 style={styles.icon}
@@ -45,7 +37,7 @@ const Header = () => {
                             />
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={handleNotificationPress}>
+                        <TouchableOpacity>
                             <Image
                                 source={require('../assets/icons/notificationicon.png')}
                                 style={styles.icon}
@@ -72,7 +64,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingVertical: 5,
         paddingHorizontal: 15,
-        marginTop: 0
+        marginTop: 0,
     },
     centerContainer: {
         flex: 1,
@@ -86,15 +78,6 @@ const styles = StyleSheet.create({
         width: 130,
         height: 80,
         resizeMode: 'contain',
-    },
-    onlineContainer: {
-        alignItems: 'center',
-        marginHorizontal: 5,
-    },
-    onlineText: {
-        color: 'green',
-        fontSize: 12,
-        fontWeight: 'bold',
     },
     icon: {
         width: 28,
